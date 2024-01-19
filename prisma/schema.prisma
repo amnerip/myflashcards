@@ -71,6 +71,7 @@ model Deck {
     cards Card[]
 
     @@index([name])
+    @@index([createdById])
 }
 
 model Card {
