@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 import { log } from "next-axiom";
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
+  const hello = api.deck.hello.useQuery({ text: "from tRPC" });
   log.debug('hello from home');
 
   return (
@@ -35,7 +35,7 @@ export default function Home() {
 function AuthShowcase() {
   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = api.post.getSecretMessage.useQuery(
+  const { data: secretMessage } = api.deck.getSecretMessage.useQuery(
     undefined, // no input
     { enabled: sessionData?.user !== undefined }
   );
