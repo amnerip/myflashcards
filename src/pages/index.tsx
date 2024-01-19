@@ -3,9 +3,11 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { api } from "~/utils/api";
+import { log } from "next-axiom";
 
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
+  log.debug('hello from home');
 
   return (
     <>
