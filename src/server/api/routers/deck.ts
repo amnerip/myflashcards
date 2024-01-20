@@ -36,7 +36,9 @@ export const deckRouter = createTRPCRouter({
     });
   }),
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
+  // TODO: This returns all the decks in the db, write a query just for the
+  // logged-in user.
+  getAllDecks: publicProcedure.query(( { ctx }) => {
+    return ctx.db.deck.findMany()
   }),
 });

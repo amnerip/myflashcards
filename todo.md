@@ -1,6 +1,9 @@
 # TODO:
 [x] setup a scaleable db
-[] deploy to prod
+[x] deploy to prod
+[x] load all decks in the homepage
+[] implement deck creation
+[] implement card creation
 
 # Notes
 - Deployment: https://vercel.com/ana-neris-projects/myflashcards/3YMRZfvz2Qf9dnPEfwFJk8TikJBF   
