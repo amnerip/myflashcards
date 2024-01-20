@@ -14,15 +14,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <div className="flex flex-col items-center gap-2">
+      <main className="flex justify-center">
+        <div className="">
+          <div className="flex flex-row justify-end items-right w-screen bg-blue-50 p-4">
             <AuthShowcase />
           </div>
 
-          <div>
+          <div className="flex flex-row md:max-w-2xl gap-4 px-8 py-4">
             {decks?.map((deck) => (
-              <div>{deck.name}</div>
+              <div key={deck.id} className="px-28 py-14 rounded-xl bg-slate-300 hover:bg-slate-200">{deck.name}</div>
             ))}
           </div>
         </div>
@@ -35,9 +35,9 @@ function AuthShowcase() {
   const { data: sessionData } = useSession();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="">
       <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+        className="rounded-xl bg-slate-300 px-6 py-2 font-semibold text-black no-underline transition hover:bg-slate-600 hover:text-white"
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}
