@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 
 export default function Home() {
   const { data: decks } = api.deck.getAllDecks.useQuery();
+  const { data: sessionData } = useSession();
 
   return (
     <>
@@ -17,6 +18,9 @@ export default function Home() {
       <main className="flex justify-center">
         <div className="">
           <div className="flex flex-row justify-end items-right w-screen bg-blue-50 p-4">
+            <div className="px-6 py-2">
+            {sessionData?.user?.name}
+            </div>
             <AuthShowcase />
           </div>
 
