@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 import { api } from "~/utils/api";
 
@@ -33,7 +34,7 @@ function DecksList() {
     <div className="flex flex-col justify-center md:max-w-2xl gap-2 px-8 py-4">
       <div className="flex flex-row justify-between">
         <span className="text-xl">Decks</span>
-        <button className="px-4 bg-sky-500 rounded">+</button>
+        <Link href={`/createDeck`} className="px-4 bg-sky-500 rounded"> + </Link>
       </div>
       {items.map(
         (deck) => (
