@@ -4,6 +4,7 @@
 [x] load all decks in the homepage
 [] implement deck creation
 [] implement card creation
+[] implement deck deletion
 
 
 # Notes
