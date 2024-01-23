@@ -2,9 +2,9 @@ import { api } from "~/utils/api";
 import { useState } from "react";
 
 export default function CreateDeckPage() {
-  return <div>
+  return <>
     <CreateDeck/>
-  </div>
+  </>
 }
 
 
