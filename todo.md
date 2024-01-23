@@ -2,7 +2,8 @@
 [x] setup a scaleable db
 [x] deploy to prod
 [x] load all decks in the homepage
-[] implement deck creation
+[x] implement deck creation
+[] implement deck view page
 [] implement card creation
 [] implement deck deletion
 

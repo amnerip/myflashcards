@@ -14,17 +14,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex justify-center">
-        <div>
+      <main>
+        <div className="flex flex-col w-screen h-screen justify-start">
           <Header />
+          <div id="body" className="flex justify-center w-full">
           {
             status == "authenticated" ? 
               <div>
                 <DecksList /> 
                 <CreateDeck />
               </div> 
-              : <span>Sign in to get started!</span>
+              :  <div/>
           }
+          </div>
         </div>
       </main>
     </>
@@ -38,10 +40,11 @@ function DecksList() {
   const items = decks.map((d) => ({ id: d.id, name: d.name }))
 
   return (
-    <div className="flex flex-row md:max-w-2xl gap-4 px-8 py-4">
+    <div className="flex flex-col justify-center md:max-w-2xl gap-2 px-8 py-4">
+      <span className="text-xl">Decks</span>
       {items.map(
         (deck) => (
-          <div key={deck.id} className="px-28 py-14 rounded-xl bg-slate-300 hover:bg-slate-200">{deck.name}</div>
+          <div key={deck.id} className="px-4 py-2 rounded-sm bg-slate-300 hover:bg-slate-200">{deck.name}</div>
         )
       )}
     </div>
@@ -51,7 +54,7 @@ function DecksList() {
 function Header() {
   const { data: sessionData, status } = useSession();
   return <>
-    <div className="flex flex-row justify-end items-right w-screen bg-blue-50 p-4">
+    <div className="flex flex-row justify-end items-right w-full bg-blue-50 p-4">
       <div className="px-6 py-2">
         {status == "authenticated" && sessionData.user?.name}
       </div>
