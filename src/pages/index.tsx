@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-
+import LoadingSpinner from "~/components/loading";
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col w-screen h-screen justify-start">
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center items-center w-full">
           {
             status == "authenticated" ?
               <>
@@ -23,20 +23,20 @@ export default function Home() {
 }
 
 function DecksList() {
-  // TODO: write a query that returns only the names.
-  const { data: decks, isLoading } = api.deck.getAllDecks.useQuery();
+  const { data: decks, isLoading } = api.deck.getUserDecks.useQuery();
 
-  if (!decks || isLoading) return <div>Loading...</div>
+  if (isLoading) return <div className="p-16"><LoadingSpinner /></div>
 
-  const items = decks.map((d) => ({ id: d.id, name: d.name }))
+  if (!decks) return <div>404</div>
+
 
   return (
     <div className="flex flex-col justify-center md:max-w-2xl gap-2 px-8 py-4">
       <div className="flex flex-row justify-between">
-        <span className="text-xl">Decks</span>
-        <Link href={`/createDeck`} className="px-4 bg-sky-500 rounded"> + </Link>
+        { decks.length != 0 && <span className="text-xl px-4 items-center flex">Decks</span> }
+        <Link href={`/createDeck`} className="px-4 py-2 bg-sky-500 rounded"> Create Deck </Link>
       </div>
-      {items.map(
+      {decks.map(
         (deck) => (
           <div
             key={deck.id}

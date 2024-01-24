@@ -2,9 +2,11 @@ import { api } from "~/utils/api";
 import { useState } from "react";
 
 export default function CreateDeckPage() {
-  return <>
-    <CreateDeck/>
-  </>
+  return (
+    <div className="flex flex-col p-4 gap-4">
+      <CreateDeck />
+    </div>
+  )
 }
 
 
@@ -18,7 +20,7 @@ function CreateDeck() {
   });
 
   return (
-    <div className="flex flex-col p-4 gap-4">
+    <>
       <div className="flex flex-col bg-slate-300 rounded gap-1 px-4 py-2">
         <label htmlFor="deck-name" className="text-xs/none"> Deck Name </label>
         <input
@@ -42,6 +44,6 @@ function CreateDeck() {
       >
         Create
       </button>
-    </div>
+    </>
   )
 }
