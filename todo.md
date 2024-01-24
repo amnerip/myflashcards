@@ -3,7 +3,7 @@
 [x] deploy to prod
 [x] load all decks in the homepage
 [x] implement deck creation
-[] implement deck view page
+[x] implement deck view page
 [] implement card creation
 [] implement deck deletion
 
