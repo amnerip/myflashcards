@@ -40,7 +40,7 @@ function DecksList() {
         (deck) => (
           <Link
             key={deck.id}
-            href={`/decks/${deck.id}`}
+            href={`/deck/${deck.id}`}
             className="px-4 py-2 rounded-sm bg-slate-300 hover:bg-slate-200"
           >
             {deck.name}

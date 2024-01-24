@@ -7,14 +7,6 @@ import {
 } from "~/server/api/trpc";
 
 export const deckRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
   createDeck: protectedProcedure
     .input(z.object({ name: z.string().min(1).max(255) }))
     .mutation(async ({ ctx, input }) => {
@@ -32,6 +24,12 @@ export const deckRouter = createTRPCRouter({
       where: { createdBy: { id: ctx.session.user.id } },
     });
   }),
+
+  getDeck: protectedProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.deck.findUnique({ where: { id: input.id } })
+    }),
 
   getUserDecks: protectedProcedure
     .query(({ ctx }) => {
