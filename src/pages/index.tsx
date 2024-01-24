@@ -34,16 +34,17 @@ function DecksList() {
     <div className="flex flex-col justify-center md:max-w-2xl gap-2 px-8 py-4">
       <div className="flex flex-row justify-between">
         { decks.length != 0 && <span className="text-xl px-4 items-center flex">Decks</span> }
-        <Link href={`/createDeck`} className="px-4 py-2 bg-sky-500 rounded"> Create Deck </Link>
+        <Link href={`/deck/create`} className="px-4 py-2 bg-sky-500 rounded"> Create Deck </Link>
       </div>
       {decks.map(
         (deck) => (
-          <div
+          <Link
             key={deck.id}
+            href={`/decks/${deck.id}`}
             className="px-4 py-2 rounded-sm bg-slate-300 hover:bg-slate-200"
           >
             {deck.name}
-          </div>
+          </Link>
         )
       )}
     </div>
