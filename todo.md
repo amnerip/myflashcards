@@ -4,7 +4,9 @@
 [x] load all decks in the homepage
 [x] implement deck creation
 [x] implement deck view page
-[] implement card creation
+[] implement card creation in deck creation
+[] implement adding new card to deck in deck view page
+[] implement card/deck editing in deck view page.
 [] implement deck deletion
 
 

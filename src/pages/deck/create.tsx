@@ -19,6 +19,7 @@ type DeckObject = {
 }
 
 function CreateDeck() {
+  // TODO: add ability to grow the number of cards in the deck.
   const { register, handleSubmit, control } = useForm<DeckObject>({
     defaultValues: {
       cards: [{ question: "", answer: "" }]
