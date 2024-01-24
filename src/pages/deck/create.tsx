@@ -19,7 +19,7 @@ type DeckObject = {
 }
 
 function CreateDeck() {
-  const { register, handleSubmit, watch, control } = useForm<DeckObject>({
+  const { register, handleSubmit, control } = useForm<DeckObject>({
     defaultValues: {
       cards: [{ question: "", answer: "" }]
     }
@@ -29,20 +29,19 @@ function CreateDeck() {
     name: "cards", // unique name for your Field Array
   });
 
-  const deckCreateMutation = api.deck.createDeck.useMutation({
+  const { mutate, isLoading } = api.deck.create.useMutation({
     onSuccess: () => {
       // TODO: clear form inputs
       return
     }
   });
-  console.log(watch())
 
   const onSubmit: SubmitHandler<DeckObject> = (data) => {
-    deckCreateMutation.mutate({ name: data.name })
-    console.log(data)
-    return
+    return mutate({ name: data.name, cards: data.cards })
   }
 
+  // TODO: Popup with notice about whether it worked or not, provide link to deck view page.
+  // TODO: clear form inputs when succesfully submitted
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
@@ -54,7 +53,7 @@ function CreateDeck() {
             className="grow outline-none bg-transparent w-full border-red-700"
             placeholder="Enter the deck's title"
             maxLength={255}
-            disabled={deckCreateMutation.isLoading}
+            disabled={isLoading}
             {...register("name")}
           />
         </div>
@@ -76,7 +75,7 @@ function CreateDeck() {
 
         <input type="submit"
           className="rounded bg-sky-500 py-4"
-          disabled={deckCreateMutation.isLoading}
+          disabled={isLoading}
         />
       </form>
     </>

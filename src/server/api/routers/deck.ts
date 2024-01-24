@@ -3,17 +3,30 @@ import { z } from "zod";
 import {
   createTRPCRouter,
   protectedProcedure,
-  publicProcedure,
 } from "~/server/api/trpc";
 
 export const deckRouter = createTRPCRouter({
-  createDeck: protectedProcedure
-    .input(z.object({ name: z.string().min(1).max(255) }))
+  create: protectedProcedure
+    .input(
+      z.object(
+        {
+          name: z.string().min(1).max(255),
+          cards: z.object(
+            {
+              question: z.string(), answer: z.string()
+            }
+          ).array()
+        }
+      )
+    )
     .mutation(async ({ ctx, input }) => {
       return ctx.db.deck.create({
         data: {
           name: input.name,
           createdBy: { connect: { id: ctx.session.user.id } },
+          cards: {
+            create: input.cards
+          }
         },
       });
     }),

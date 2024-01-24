@@ -84,5 +84,5 @@ model Card {
 
     question      String
     answer        String
-    lastPracticed DateTime
+    lastPracticed DateTime?
 }
