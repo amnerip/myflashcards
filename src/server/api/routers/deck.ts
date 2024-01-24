@@ -25,10 +25,13 @@ export const deckRouter = createTRPCRouter({
     });
   }),
 
-  getDeck: protectedProcedure
+  getFullDeck: protectedProcedure
     .input(z.object({ id: z.number().int() }))
     .query(({ ctx, input }) => {
-      return ctx.db.deck.findUnique({ where: { id: input.id } })
+      return ctx.db.deck.findUnique({
+        where: { id: input.id },
+        include: { cards: true }
+      })
     }),
 
   getUserDecks: protectedProcedure
