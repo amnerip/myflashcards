@@ -25,7 +25,7 @@ function CreateDeck() {
       cards: [{ question: "", answer: "" }]
     }
   });
-  const { fields } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "cards", // unique name for your Field Array
   });
@@ -64,15 +64,32 @@ function CreateDeck() {
             (item, index) => {
               return (
                 <>
-                  <div key={item.id} className="flex flex-row justify-evenly bg-slate-300 px-2 py-2">
-                    <input type="text" className="flex grow bg-transparent border-r outline-none px-2" placeholder="Question" {...register(`cards.${index}.question`)} />
-                    <input type="text" className="flex grow bg-transparent border-l outline-none px-2" placeholder="Answer" {...register(`cards.${index}.answer`)} />
+                  <div key={item.id} className="flex flex-row justify-evenly py-2 gap-2">
+                    <div className="flex flex-row grow justify-evenly rounded bg-slate-300 py-2 px-2">
+                      <input type="text" className="flex grow bg-transparent border-r outline-none px-2" placeholder="Question" {...register(`cards.${index}.question`)} />
+                      <input type="text" className="flex grow bg-transparent border-l outline-none px-2" placeholder="Answer" {...register(`cards.${index}.answer`)} />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => remove(index)}
+                      className="bg-sky-50 px-2 rounded"
+                    >
+                      x
+                    </button>
                   </div>
                 </>
               )
             }
           )
         }
+        <button
+          type="button"
+          onClick={() => append({ question: "", answer: "" })}
+          className="bg-sky-50"
+        >
+          +
+        </button>
+
 
         <input type="submit"
           className="rounded bg-sky-500 py-4"
