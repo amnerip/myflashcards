@@ -1,12 +1,13 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
+import { lora } from "~/styles/fonts";
 export default function Navbar() {
   const { data: sessionData, status } = useSession();
   return <>
     <div className="flex flex-row w-full justify-between bg-blue-50 p-4 text-center">
       <div className="text-xl flex items-center px-2">
-        <Link href={`/`}>
+        <Link href={`/`} className={lora.className}>
           My Flashcards
         </Link>
       </div>

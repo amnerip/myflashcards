@@ -8,6 +8,7 @@ import Head from "next/head";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import { inter } from '~/styles/fonts'
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,6 +17,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Analytics />
+        <style jsx global>{`
+            html {
+            font-family: ${inter.style.fontFamily};
+          }
+        `}</style>
       <Head>
         <title>MyFlashcards</title>
         <meta name="description" content="Simple flashcards app" />
