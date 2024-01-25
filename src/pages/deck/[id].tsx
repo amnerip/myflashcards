@@ -26,9 +26,9 @@ export default function DeckView() {
       <div className="flex flex-col p-4">
         {
           deck.cards.map((c) => {
-            return <div key={c.id} className="flex justify-evenly py-2 bg-slate-100">
-              <span className="text-left"> {c.question} </span>
-              <span> {c.answer} </span>
+            return <div key={c.id} className="flex flex-row justify-around p py-4 rounded bg-slate-100">
+              <span className="flex grow border-r px-4"> {c.question} </span>
+              <span className="flex grow border-l px-4"> {c.answer} </span>
             </div>
           })
         }
