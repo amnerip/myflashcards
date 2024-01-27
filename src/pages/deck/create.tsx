@@ -1,4 +1,5 @@
 import { api } from "~/utils/api";
+import { useRouter as useNavigate } from "next/navigation";
 
 import { useForm, useFieldArray, SubmitHandler } from "react-hook-form"
 
@@ -19,20 +20,23 @@ type DeckObject = {
 }
 
 function CreateDeck() {
-  // TODO: add ability to grow the number of cards in the deck.
+  const navigate = useNavigate()
+  const trpcUtils = api.useUtils()
+
   const { register, handleSubmit, control } = useForm<DeckObject>({
     defaultValues: {
       cards: [{ question: "", answer: "" }]
     }
   });
   const { fields, append, remove } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "cards", // unique name for your Field Array
+    control,
+    name: "cards",
   });
 
   const { mutate, isLoading } = api.deck.create.useMutation({
-    onSuccess: () => {
-      // TODO: clear form inputs
+    onSuccess: (data) => {
+      void trpcUtils.deck.getUserDecks.invalidate()
+      navigate.push(`/deck/${data.id}`)
       return
     }
   });
@@ -41,8 +45,7 @@ function CreateDeck() {
     return mutate({ name: data.name, cards: data.cards })
   }
 
-  // TODO: Popup with notice about whether it worked or not, provide link to deck view page.
-  // TODO: clear form inputs when succesfully submitted
+  // TODO: Popup with notice about whether it worked or not
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
