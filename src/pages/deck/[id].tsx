@@ -41,7 +41,9 @@ export default function DeckViewPage() {
   if (deckLoading || !router.isReady) return <div className="flex h-screen justify-center"> <LoadingSpinner /> </div>
 
   if (!deck) return <ErrorPage statusCode={404} />
-  setValue('deckId', deck.id)
+  if (addCards) {
+    setValue('deckId', deck.id)
+  }
 
   const onSubmit: SubmitHandler<UpdateFields> = (data) => {
     console.log(data)
@@ -63,6 +65,8 @@ export default function DeckViewPage() {
             {
               !addCards &&
               <>
+                <button
+                  className="px-4 py-3 bg-green-500 rounded-md" onClick={() => { navigate.push(`/deck/practice?id=${deck.id}`) }}> Practice </button>
                 <button
                   className="px-4 py-3 bg-sky-500 rounded-md" onClick={() => { navigate.push(`/deck/${deck.id}?addCards=1`) }}> Add Card </button>
                 <button
