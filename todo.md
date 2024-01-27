@@ -4,10 +4,11 @@
 [x] load all decks in the homepage
 [x] implement deck creation
 [x] implement deck view page
-[] implement card creation in deck creation
-[] implement adding new card to deck in deck view page
+[x] implement card creation in deck creation
+[x] implement adding new card to deck in deck view page
+[x] implement deck deletion
 [] implement card/deck editing in deck view page.
-[] implement deck deletion
+[] implement study UI and algorithm
 
 
 # Notes
