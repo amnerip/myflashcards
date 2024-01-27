@@ -31,6 +31,40 @@ export const deckRouter = createTRPCRouter({
       });
     }),
 
+  delete: protectedProcedure
+    .input(z.object({ id: z.number().int() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.db.deck.delete(
+        {
+          where: {
+            id: input.id
+          }
+        }
+      )
+    }),
+
+  createCards: protectedProcedure
+    .input(
+      z.object(
+        {
+          deckId: z.number().int(),
+          cards: z.object(
+            {
+              question: z.string(),
+              answer: z.string()
+            }
+          ).array()
+        }
+      )
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.card.createMany(
+        {
+          data: input.cards.map((card) => { return {deckId: input.deckId, ...card} })
+        }
+      )
+    }),
+
   getLatest: protectedProcedure.query(({ ctx }) => {
     return ctx.db.deck.findFirst({
       orderBy: { createdAt: "desc" },
