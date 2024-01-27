@@ -5,7 +5,7 @@ export default function PracticeDeck() {
   const router = useRouter()
   if (!router.isReady) return <LoadingSpinner />
 
-  const deckId = parseInt(router.query.id)
+  // const deckId = parseInt(router.query.id)
   /**
    * the algorithm for practiciing flashcards:
    * https://fluent-forever.com/wp-content/uploads/2014/05/LeitnerSchedule.pdf
