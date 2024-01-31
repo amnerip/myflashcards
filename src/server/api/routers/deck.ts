@@ -77,7 +77,7 @@ export const deckRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       return ctx.db.deck.findUnique({
         where: { id: input.id },
-        include: { cards: true }
+        include: { cards: true, practiceSession: true }
       })
     }),
 
