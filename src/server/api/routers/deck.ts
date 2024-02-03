@@ -82,7 +82,7 @@ export const deckRouter = createTRPCRouter({
     }),
 
   getUserDecks: protectedProcedure
-    .query(({ ctx }) => {
+    .query(async ({ ctx }) => {
       return ctx.db.deck.findMany(
         {
           select: { name: true, id: true },

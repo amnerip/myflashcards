@@ -13,7 +13,7 @@ export default function PracticeDeck() {
   const router = useRouter()
   const deckId = parseInt(router.query.id as string)
 
-  const { data: session, isLoading: sessionLoading } = api.practice.get.useQuery(
+  const { data, isLoading: sessionLoading } = api.practice.get.useQuery(
     { deckId: deckId },
     { enabled: router.isReady }
   );
@@ -40,9 +40,9 @@ export default function PracticeDeck() {
   // - show the oldest levels firsta
 
 
-  if (!session)
+  if (!data)
     return <CreatePracticeSessionForm deckId={deckId}/>
-  else console.log(session)
+  else console.log(data)
 }
 
 function CreatePracticeSessionForm(props: {deckId: number}) {

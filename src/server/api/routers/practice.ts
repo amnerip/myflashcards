@@ -26,7 +26,7 @@ export const practiceRouter = createTRPCRouter({
     z.object( { deckId: z.number().int() })
   )
   .query(
-    ({  ctx, input  }) => {
+    async ({  ctx, input  }) => {
       return ctx.db.deckPracticeSession.findUnique({
         where: { deckId: input.deckId }
       })
