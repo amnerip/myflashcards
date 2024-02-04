@@ -9,6 +9,9 @@
 [x] implement deck deletion
 [] implement card/deck editing in deck view page.
 [] implement study UI and algorithm
+[] deck deletion: delete deck practice status
+[] UI: remove an existing card from a deck
+    [] card deletion: delete card practice status
 
 
 # Notes
