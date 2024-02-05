@@ -3,11 +3,19 @@ import LoadingSpinner from "~/components/loading"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { api } from "~/utils/api"
 import { useRouter as useNavigate } from "next/navigation";
+import { Prisma } from '@prisma/client';
 
 
 type PracticeSessionForm = {
   levels: number
 }
+
+const deckPracticeSessionWithCards = Prisma.validator<Prisma.DeckPracticeSessionDefaultArgs>()({
+  include: { cards: true }
+})
+
+type DeckPracticeSessionWithCards = Prisma.DeckPracticeSessionGetPayload<typeof deckPracticeSessionWithCards>;
+
 
 export default function PracticeDeck() {
   const router = useRouter()
@@ -41,11 +49,24 @@ export default function PracticeDeck() {
 
 
   if (!data)
-    return <CreatePracticeSessionForm deckId={deckId}/>
-  else console.log(data)
+    return <CreatePracticeSessionForm deckId={deckId} />
+  else
+    return <RunPracticeSession session={data} />
 }
 
-function CreatePracticeSessionForm(props: {deckId: number}) {
+function RunPracticeSession(props: { session: DeckPracticeSessionWithCards }) {
+  // show question, one by one, have two buttons. one for remembered, another for forgot
+  // we order cards by their id in ascending order, track the largest id reviewed, for each card that's reviewed we make a card practice status
+  // after we wento ver the pending cards without status we look at all the cards that have a status, we only want to review the ones that are due.
+  // so for each level we have a function for if it's due to review. if as of today we're past the defined interval.
+  //
+  return (
+    <>
+    </>
+  )
+}
+
+function CreatePracticeSessionForm(props: { deckId: number }) {
   const defaultLevel = 4
   const { deckId } = props
 

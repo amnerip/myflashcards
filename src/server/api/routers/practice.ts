@@ -28,7 +28,8 @@ export const practiceRouter = createTRPCRouter({
   .query(
     async ({  ctx, input  }) => {
       return ctx.db.deckPracticeSession.findUnique({
-        where: { deckId: input.deckId }
+        where: { deckId: input.deckId },
+        include: { cards: true },
       })
     }
   )
