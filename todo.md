@@ -13,6 +13,10 @@
 [] UI: remove an existing card from a deck
     [] card deletion: delete card practice status
 
+# Bugs
+[] UI: in card view component, have question and answer divs have the same width, so 
+    the center spacer aligns across all the different cards.
+
 
 # Notes
 - Deployment: https://vercel.com/ana-neris-projects/myflashcards/3YMRZfvz2Qf9dnPEfwFJk8TikJBF   
